@@ -1,0 +1,9 @@
+<mapper namespace="user">
+<!--    sql方法的唯一标识:由namespace.id组成-->
+    <select id="selectAll" resultType="com.pyip.pojo.User">
+        select * from user;
+    </select>
+    <select id="selectOne" resultType="com.pyip.pojo.User" paramType="com.pyip.pojo.User">
+        select * from user where id = #{id} and username = #{username};
+    </select>
+</mapper>
