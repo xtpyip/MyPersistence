@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pyip.mapper.IUserMapper">
+    <resultMap id="userMap" type="com.pyip.pojo.User">
+        <result column="id" property="id"></result>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="birthday" property="birthday"></result>
+        <collection property="orderList" ofType="com.pyip.pojo.Order">
+            <result column="oid" property="id"></result>
+            <result column="orderTime" property="orderTime"></result>
+            <result column="total" property="total"></result>
+        </collection>
+    </resultMap>
+    <select id="findAll" resultMap="userMap">
+        select *,o.id oid from user u left join orders o on u.id=o.uid
+    </select>
+
+    <resultMap id="userRoleMap" type="com.pyip.pojo.User">
+        <result column="id" property="id"></result>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="birthday" property="birthday"></result>
+        <collection property="roleList" ofType="com.pyip.pojo.Role">
+            <result column="rid" property="id"></result>
+            <result column="roleName" property="roleName"></result>
+            <result column="roleDesc" property="roleDesc"></result>
+        </collection>
+    </resultMap>
+    <select id="findAllUserAndRole" resultMap="userRoleMap">
+        select u.*,r.*,r.id rid from user u
+                                         left join sys_user_role ur on u.id=ur.userid
+                                         inner join sys_role r on ur.roleid=r.id;
+    </select>
+<!--    基于xml开发开启二级缓存-->
+<!--    <cache></cache>-->
+<!--    <cache type="org.mybatis.caches.redis.RedisCache" />-->
+</mapper>
