@@ -1,31 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <excludeFromCompile>
-      <directory url="file://$PROJECT_DIR$/IPersistence_test/src/main/resources/archetype-resources" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/IPersistence/src/main/resources/archetype-resources" includeSubdirectories="true" />
-    </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="IPersistence_test" />
-        <module name="quickStart" />
-        <module name="design_pattern" />
+        <module name="lagou-mybatis-plus-spring" />
         <module name="lagou_mybatis_plus_spring" />
-        <module name="mybatis_multitable" />
-        <module name="lagou-mybatis-plus-simple" />
-        <module name="mybatis" />
-        <module name="lagou-mp-generator" />
-        <module name="IPersistence" />
         <module name="lagou-mp-springboot" />
+        <module name="lagou-mybatis-plus-simple" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="11">
+      <module name="lagou-mybatis-plus-spring" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="lagou-mp-generator" options="-parameters" />
       <module name="lagou-mp-springboot" options="-parameters" />
     </option>
   </component>

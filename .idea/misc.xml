@@ -9,6 +9,10 @@
         <option value="$PROJECT_DIR$/mybatis_quickStart/pom.xml" />
         <option value="$PROJECT_DIR$/mybatis_multitable/pom.xml" />
         <option value="$PROJECT_DIR$/mybatis-3-master/pom.xml" />
+        <option value="$PROJECT_DIR$/design_pattern/pom.xml" />
+        <option value="$PROJECT_DIR$/mp_code/lagou-mp-generator/pom.xml" />
+        <option value="$PROJECT_DIR$/mp_code/lagou-mp-springboot/pom.xml" />
+        <option value="$PROJECT_DIR$/mp_code/lagou-mybatis-plus/pom.xml" />
       </list>
     </option>
   </component>
