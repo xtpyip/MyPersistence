@@ -46,18 +46,46 @@ public class DefaultSqlSession implements SqlSession {
                 // className:namespace
                 String className = method.getDeclaringClass().getName();
                 //statementid
-                String key = className + "." + methodName;
-                MappedStatement mappedStatement =
-                        configuration.getMappedStatementMap().get(key);
+                String statementId = className + "." + methodName;
+
+                // 准备参数2：params:args
+                // 获取被调用方法的返回值类型
                 Type genericReturnType = method.getGenericReturnType();
-                ArrayList arrayList = new ArrayList<>();
-                //判断是否实现泛型类型参数化
-                if (genericReturnType instanceof ParameterizedType) {
-                    return selectList(key, args);
+                // 判断是否进行了 泛型类型参数化
+                if(genericReturnType instanceof ParameterizedType){
+                    List<Object> objects = selectList(statementId, args);
+                    return objects;
                 }
-                return selectOne(key, args);
+
+                MappedStatement mappedStatement = configuration.getMappedStatementMap().get(statementId);
+
+                String sql = mappedStatement.getSql();
+                if(sql.startsWith("update")){
+                    return update(statementId,args);
+                }
+                if(sql.startsWith("delete")){
+                    return delete(statementId,args);
+                }
+                return selectOne(statementId,args);
             }
         });
         return o;
+    }
+
+    @Override
+    public Integer update(String statementid, Object... params) throws Exception {
+        Executor simpleExecutor = new SimpleExecutor();
+        MappedStatement mappedStatement = configuration.getMappedStatementMap().get(statementid);
+        Integer i = simpleExecutor.update(configuration, mappedStatement, params);
+        return i;
+    }
+
+    @Override
+    public Integer delete(String statementid, Object... params) throws Exception {
+        Executor simpleExecutor = new SimpleExecutor();
+        MappedStatement mappedStatement = configuration.getMappedStatementMap().get(statementid);
+        Integer i = simpleExecutor.delete(configuration, mappedStatement, params);
+        return i;
+
     }
 }
